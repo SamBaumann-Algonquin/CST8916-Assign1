@@ -199,9 +199,9 @@ not waste resources by fetching superfluous data, and Websockets are ideal for t
 
 ## Conclusion
 
-In summary, some stuff
+In summary, through a combination of REST, GraphQL and Websockets, we believe that a hybrid solution would be best for a real-time chat application. If forced to choose one, Websockets are definitely the largest part of real-time application, but we think that each element has something to provide when it comes to getting users to communicate with each other in a timely manner! As an additional recap, please follow the link below to a video summary by Sam & Mo to discuss our ideas in more detail:
 
-*link to video here once we publish it to YouTube
+[Link to our 7 minute video presentation](https://youtu.be/1JQzC_C-C2I)
 
 ## References
 
