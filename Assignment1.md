@@ -94,11 +94,72 @@ to create a fair bit of overhead - and these are relatively small and polished e
 What happens when we need immediate access to new information, over and over? What happens when only some elements of the information actually change, while
 the rest remains static (and fetching the same bit of information again and again is a waste of resources!) Enter GraphQL:
 
+```
+mutation ($username: String!) {
+  insert_user_one(object: { username: $username }) {
+    id
+    username
+  }
+}
+```
 
+GraphQL allows us to forgo the over or underfetching issues RESTful APIs struggle with by using queries, mutations and subscriptions to only access what
+they need from a backend server. In the above example, creating a new user is as simple as making a function call on the spot to input an ID and username
+into a database (again, actual variable names and values may vary). 
 
 ## WebSockets
 
-Here we will talk about Websockets
+WebSockets provide a full-duplex communication channel over a single, long-lived connection, allowing real-time data exchange between a client and a server. This makes it ideal for interactive and high-performance web applications.
+
+**Format**: Binary  
+**Transport protocol**: TCP  
+
+
+### Key Concepts and Characteristics
+
+- **Persistent Connection**: Unlike the traditional request-response model, WebSockets provide a full-duplex communication channel that remains open, allowing for real-time data exchange.
+- **Upgrade Handshake**: WebSockets start as an HTTP request, which is then upgraded to a WebSocket connection if the server supports it (via the `Upgrade` header).
+- **Frames**: Once the connection is established, data is transmitted as frames. Both text and binary data can be sent through these frames.
+- **Low Latency**: Direct communication between client and server reduces overhead, enabling faster data exchange compared to repeated HTTP connections.
+- **Bidirectional**: Both client and server can send messages independently.
+- **Less Overhead**: After the initial connection, data frames require fewer bytes, improving performance.
+- **Protocols and Extensions**: Supports subprotocols and extensions for standardized or custom protocols.
+
+
+### Use Cases
+
+- **Online Gaming**: Real-time multiplayer games requiring instant action updates.
+- **Collaborative Tools**: Applications like Google Docs for simultaneous editing.
+- **Financial Applications**: Real-time stock price updates in trading platforms.
+- **Notifications**: Social media or messaging apps delivering instant alerts.
+- **Live Feeds**: News websites streaming updates to users in real-time.
+
+
+### **Application to Chat Apps**  
+- **Workflow**:  
+  1. User A sends a message via WebSocket.  
+  2. Server broadcasts it to all clients in the channel.  
+  3. User B receives the message instantly.  
+- **Pros**:  
+  - Real-Time Updates: Messages appear without manual refreshing.  
+  - Efficiency: Avoids HTTP overhead for frequent updates.  
+- **Cons**:  
+  - Scalability: Managing many concurrent connections requires robust infrastructure.  
+  - Complexity: Requires stateful connections (unlike REST/GraphQL). 
+
+
+### Example
+
+**Request**  
+```http
+GET ws://site:8181
+HTTP/1.1 101 Switching Protocols
+Upgrade: websocket
+Connection: Upgrade
+Sec-WebSocket-Accept: [hash]
+```
+
+---
 
 ## Optimization & Testing
 
