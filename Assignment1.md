@@ -1,4 +1,4 @@
-# CST8914 Assignment 1 - Real-Time Applications with REST, GraphQL & WebSockets
+# CST8916 Assignment 1 - Real-Time Applications with REST, GraphQL & WebSockets
 By Samuel Baumann & Mohit Singh Panwar
 
 Scenario: Real-time chat application use case, with a focus on social platforms
