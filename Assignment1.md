@@ -176,9 +176,9 @@ Sec-WebSocket-Accept: [hash]
 
 ## Optimization & Testing
 
-To compare and contrast the pros and cons of each approach, we queried our good friend ChatGPT and had it generate a table for us to outline the strengths
-and weaknesses of each method (naturally, we made sure to critically examine its output and make sure that it lined up with our findings in parts I and initial
-of this document!)
+To compare and contrast the pros and cons of each approach, we referred to an extremely helpful AppWrite blog and had ChatGPT generate a table for us  based on 
+the information found within it to outline the strengths and weaknesses of each method (naturally, we made sure to critically examine its output and make
+sure that it lined up with our findings in parts I and initial of this document!)
 
 | **Criteria**              | **REST**                                | **GraphQL**                              | **WebSockets**                    |  
 |---------------------------|-----------------------------------------|------------------------------------------|-----------------------------------|  
@@ -215,4 +215,4 @@ Bridging the Gap: https://medium.com/@novenkottage/bridging-the-gap-rest-graphql
 
 REST, GraphQL and Websockets System Design Cheat sheet: https://hackernoon.com/the-system-design-cheat-sheet-api-styles-rest-graphql-websocket-webhook-rpcgrpc-soap
 
-ChatGPT: Comparison analysis table
+Use-Case comparison: (https://appwrite.io/blog/post/rest-vs-graphql-websockets-which-is-best-for-your-app) + Summarization by ChatGPT
