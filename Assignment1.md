@@ -105,7 +105,20 @@ mutation ($username: String!) {
 
 GraphQL allows us to forgo the over or underfetching issues RESTful APIs struggle with by using queries, mutations and subscriptions to only access what
 they need from a backend server. In the above example, creating a new user is as simple as making a function call on the spot to input an ID and username
-into a database (again, actual variable names and values may vary). 
+into a database (again, actual variable names and values may vary). If we want to be reguarly informed of changes on the backend (such as receiving a new
+message from a user), we can utilize GraphQL's Subscription feature to be constantly updated whenever something changes:
+
+subscription {
+  message(order_by: { id: desc }, limit: 1) {
+    id
+    username
+    text
+    timestamp
+  }
+}
+
+Here, we subscribe to new message events, and call our message query with a last known ID and timestamp to make sure our user has as much information as
+possible as often as possible.
 
 ## WebSockets
 
@@ -163,7 +176,26 @@ Sec-WebSocket-Accept: [hash]
 
 ## Optimization & Testing
 
-Blah blah justify yadda yadda technology
+To compare and contrast the pros and cons of each approach, we queried our good friend ChatGPT and had it generate a table for us to outline the strengths
+and weaknesses of each method (naturally, we made sure to critically examine its output and make sure that it lined up with our findings in parts I and initial
+of this document!)
+
+| **Criteria**              | **REST**                                | **GraphQL**                              | **WebSockets**                    |  
+|---------------------------|-----------------------------------------|------------------------------------------|-----------------------------------|  
+| **Data Fetching**         | Multiple endpoints, fixed responses     | Single endpoint, flexible queries        | Persistent, bidirectional streams |  
+| **Real-Time Support**     | Polling required (inefficient)          | Polling required (inefficient)           | Native real-time updates          |  
+| **Over-fetching**         | Common (full resource responses)        | Avoided (client-defined queries)         | N/A (event-driven)                |  
+| **Scalability**           | Easy (stateless)                        | Moderate (schema/resolver complexity)    | Challenging (stateful connections)|  
+| **Use Case Fit**          | Simple CRUD operations                  | Complex, dynamic data needs              | Real-time communication           |  
+
+As we can see above, the table outlines quite clearly that this seems to not be as straightforward as choosing just one! Real-time applications by definition benefit from
+having native support, and  barriers such as over-fetching are definite downsides that REST and GraphQL stumble on. The use-case for Websockets fits perfectly with any
+real-time system, especially a chatroom application, and if a company such as WhatsApp or Facebook wishes to host, create and update thousands or even millions of 
+users, rooms and messages at once, a highly scalable and robust solution would outweigh any downside of additional complexity incurred by a more challenging implementation.
+
+For these reasons, mixing and matching would be our reccomendation for a chatroom application. In the case of a live chat, RESTful APIs would be best suited for the more
+static operations such as creating and mainting users within the system. GraphQL can be used for more surgical queries when searching for specific information so as to 
+not waste resources by fetching superfluous data, and Websockets are ideal for the actual (and arguably most important) peer-to-peer communication of a real-time chat.
 
 ## Conclusion
 
@@ -176,3 +208,11 @@ In summary, some stuff
 Websites or articles we used go here:
 
 Microsoft Graph REST API: https://learn.microsoft.com/en-us/graph/api/chat-post?view=graph-rest-1.0&tabs=http
+
+Building a GraphQL App with Hasura: https://hasura.io/blog/building-a-realtime-chat-app-with-graphql-subscriptions-d68cd33e73f
+
+Bridging the Gap: https://medium.com/@novenkottage/bridging-the-gap-rest-graphql-and-websockets-e27f2a87090a
+
+REST, GraphQL and Websockets System Design Cheat sheet: https://hackernoon.com/the-system-design-cheat-sheet-api-styles-rest-graphql-websocket-webhook-rpcgrpc-soap
+
+ChatGPT: Comparison analysis table
